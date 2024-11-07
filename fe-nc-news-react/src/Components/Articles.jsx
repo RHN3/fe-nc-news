@@ -7,6 +7,9 @@ function Articles() {
   const [articles, setArticles] = useState();
   return (
     <div>
+      <select name="topics" id="topics">
+        <option value="all">all</option>
+      </select>
       <ArticleList articles={articles} setArticles={setArticles} />
     </div>
   );
