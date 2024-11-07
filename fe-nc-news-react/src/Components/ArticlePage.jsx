@@ -19,15 +19,12 @@ function ArticlePage() {
         console.log(error);
         setisError(true);
       });
-  });
+  }, []);
 
   function handleClick() {
     console.log("in the handle click");
   }
 
-  if (isError) {
-    return <p>Server Error 1</p>;
-  }
   if (isLoading) {
     return <p>Loading...</p>;
   }

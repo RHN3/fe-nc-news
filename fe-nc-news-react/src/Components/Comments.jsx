@@ -10,7 +10,7 @@ function Comments(props) {
     getAllCommentsByArticleId(article_id).then((comments) => {
       setComments(comments);
     });
-  });
+  }, []);
 
   return (
     <div className="article-page-comments">

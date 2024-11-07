@@ -18,11 +18,8 @@ function ArticleList(props) {
         console.log(error);
         setisError(true);
       });
-  });
+  }, []);
 
-  if (isError) {
-    return <p>Server Error 1</p>;
-  }
   if (isLoading) {
     return <p>Loading...</p>;
   }
