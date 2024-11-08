@@ -36,4 +36,15 @@ function getAllCommentsByArticleId(id) {
     });
 }
 
-export { getAllArticles, getArticlesById, getAllCommentsByArticleId };
+function patchVotesArticle(inc_votes, id) {
+  return api.patch(`api/articles/${id}`, inc_votes).then((response) => {
+    console.log(response);
+  });
+}
+
+export {
+  getAllArticles,
+  getArticlesById,
+  getAllCommentsByArticleId,
+  patchVotesArticle,
+};
