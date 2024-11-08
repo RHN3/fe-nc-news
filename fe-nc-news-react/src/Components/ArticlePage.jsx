@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { getArticlesById } from "../../api";
 import { useParams } from "react-router-dom";
 import Comments from "./Comments";
+import { patchVotesArticle } from "../../api";
 
 function ArticlePage() {
   const { article_id } = useParams();
   const [article, setArticle] = useState();
   const [isError, setisError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [upButton, setUpButton] = useState(false);
+  const [downButton, setDownButton] = useState(false);
 
   useEffect(() => {
     getArticlesById(article_id)
@@ -21,8 +24,17 @@ function ArticlePage() {
       });
   });
 
-  function handleClick() {
+  function upHandleClick() {
     console.log("in the handle click");
+    patchVotesArticle({ inc_votes: 1 }, article_id);
+    setUpButton(true);
+    setDownButton(false);
+  }
+  function downHandleClick() {
+    console.log("in the handle click");
+    patchVotesArticle({ inc_votes: -1 }, article_id);
+    setDownButton(true);
+    setUpButton(false);
   }
 
   if (isError) {
@@ -48,10 +60,20 @@ function ArticlePage() {
       </div>
       <div className="votes-article-page">
         <p>{article.votes}</p>
-        <button className="Upvote-btn" onClick={handleClick}>
+        <button
+          id="upVoteBtn"
+          className="Upvote-btn"
+          onClick={upHandleClick}
+          disabled={upButton}
+        >
           Upvote
         </button>
-        <button className="Downvote-btn" onClick={handleClick}>
+        <button
+          id="downVoteBtn"
+          className="Downvote-btn"
+          onClick={downHandleClick}
+          disabled={downButton}
+        >
           Downvote
         </button>
       </div>
